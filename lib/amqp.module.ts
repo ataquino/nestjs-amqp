@@ -182,7 +182,7 @@ export class AMQPModule implements OnApplicationBootstrap, OnApplicationShutdown
           if (!consumer?.noAck && (await f) !== false && msg) {
             channel.ack(msg)
           }
-        })
+        }, { noAck: !!consumer?.noAck })
 
         this.logger.log(`Mapped function ${consumer.methodName.toString()} with queue ${queueName}`)
       }
